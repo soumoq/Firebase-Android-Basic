@@ -37,12 +37,11 @@ public class MainActivity extends AppCompatActivity {
         Map<String, String> userMap = new HashMap<>();
         userMap.put("name", "Soumo");
         userMap.put("Roll", "26");
-        
+
 
         firebaseFirestore.collection("users").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_LONG).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -61,29 +60,43 @@ public class MainActivity extends AppCompatActivity {
                         textView.append(i.getName() + " " + i.getRoll() + "\n\n\n");
                     }
 
+                    DocumentSnapshot documentReference = queryDocumentSnapshots.getDocuments().get(0);
+                    collectionReference.document(documentReference.getId()).collection("play").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            List<Play> plays = queryDocumentSnapshots.toObjects(Play.class);
+                            Toast.makeText(MainActivity.this, plays.get(0).getName(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                    Toast.makeText(MainActivity.this, documentReference.getId() + "", Toast.LENGTH_LONG).show();
+
                 } catch (Exception e) {
                     Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-
     }
 }
 
 class Stu {
-    String name;
-    String Roll;
+    private String name;
+    private String Roll;
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getRoll() {
         return Roll;
+    }
+}
+
+class Play {
+    private String name;
+
+    public String getName() {
+        return name;
     }
 }
