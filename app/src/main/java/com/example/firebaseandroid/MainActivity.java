@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
         Map<String, String> userMap = new HashMap<>();
-        userMap.put("name", "Soumo");
-        userMap.put("Roll", "26");
+        userMap.put("name", "Mistipuchu");
+        userMap.put("Roll", "1");
 
 
         firebaseFirestore.collection("users").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -82,14 +82,14 @@ public class MainActivity extends AppCompatActivity {
 
 class Stu {
     private String name;
-    private String roll;
+    private String Roll;
 
     public String getName() {
         return name;
     }
 
     public String getRoll() {
-        return roll;
+        return Roll;
     }
 }
 
