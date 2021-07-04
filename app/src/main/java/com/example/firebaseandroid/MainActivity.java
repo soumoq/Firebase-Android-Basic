@@ -82,14 +82,14 @@ public class MainActivity extends AppCompatActivity {
 
 class Stu {
     private String name;
-    private String Roll;
+    private String roll;
 
     public String getName() {
         return name;
     }
 
     public String getRoll() {
-        return Roll;
+        return roll;
     }
 }
 
